@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
-    "generate-registry": "tsx scripts/generate-registry.ts"
+    "generate-registry": "tsx scripts/generate-registry.ts",
+    "push-k8s": "sleep 90 && kubectl delete -f ./k8s && kubectl apply -f ./k8s"
   },
   "dependencies": {
     "@chain-registry/client": "^1.53.184",
