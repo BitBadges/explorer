@@ -20,16 +20,16 @@
   "logo": "https://github.com/cosmos/chain-registry/blob/master/bitbadges/images/badge_logo.png?raw=true",
   "assets": [
     {
-      "base": "badges:40:test",
-      "symbol": "TESTZERO",
-      "exponent": "0",
-      "type_asset": "sdk.coin"
-    },
-    {
       "base": "ubadge",
       "symbol": "BADGE",
       "exponent": "9",
       "logo": "https://github.com/cosmos/chain-registry/blob/master/bitbadges/images/badge_logo.png?raw=true"
+    },
+    {
+      "base": "badges:40:test",
+      "symbol": "TESTZERO",
+      "exponent": "0",
+      "type_asset": "sdk.coin"
     },
     {
       "base": "badges:49:chaosnet",
