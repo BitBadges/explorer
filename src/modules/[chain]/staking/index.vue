@@ -369,7 +369,7 @@ loadAvatars();
             :href="`${bitbadgesBaseUrl}/stake`"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn-primary btn-sm"
+            class="btn btn-neutral btn-sm"
           >
             View on Main BitBadges Site
           </a>
