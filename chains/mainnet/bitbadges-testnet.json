@@ -4,13 +4,13 @@
   "api": [
     {
       "provider": "bitbadges",
-      "address": "https://testnet.node.bitbadges.io/api"
+      "address": "https://lcd-testnet.bitbadges.io"
     }
   ],
   "rpc": [
     {
       "provider": "bitbadges",
-      "address": "https://testnet.node.bitbadges.io/rpc"
+      "address": "https://rpc-testnet.bitbadges.io"
     }
   ],
   "sdk_version": "0.50.13",
