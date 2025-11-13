@@ -32,11 +32,10 @@ function confirmNotification() {
     <div class="modal-box">
       <h3 class="font-bold text-lg mb-4">Cosmos-Based Explorer Notice</h3>
       <p class="py-4">
-        Although BitBadges supports multiple chains' wallets (Ethereum, Solana,
-        Bitcoin, etc.), this explorer is Cosmos-based only. All addresses shown
-        are the mapped equivalent Cosmos addresses and only Cosmos wallets are
-        currently supported. If you have a non-Cosmos wallet, please use the
-        main BitBadges site for staking, sending, voting, and more.
+        In advanced cases, BitBadges supports multiple chains' wallets
+        (Ethereum, Solana, Bitcoin, etc.) through mapping to equivalent
+        BitBadges addresses. This explorer is Cosmos-based only. All addresses
+        shown are the mapped equivalent Cosmos addresses.
       </p>
       <div class="modal-action">
         <button class="btn btn-primary" @click="confirmNotification">
