@@ -187,14 +187,14 @@ export const useIndexModule = defineStore('module-index', {
           change: 0,
         },
         {
-          title: 'Supply ($BADGE)',
+          title: 'Supply (BADGE)',
           color: 'success',
           icon: 'mdi-currency-usd',
           stats: formatter.formatTokenAmount(badgeBank.supply),
           change: 0,
         },
         {
-          title: 'Bonded Tokens ($BADGE)',
+          title: 'Bonded Tokens (BADGE)',
           color: 'primary',
           icon: 'mdi-lock',
           stats: formatter.formatTokenAmount({
@@ -205,7 +205,7 @@ export const useIndexModule = defineStore('module-index', {
           change: 0,
         },
         {
-          title: 'Inflation ($BADGE)',
+          title: 'Inflation (BADGE)',
           color: 'success',
           icon: 'mdi-chart-multiple',
           stats: formatter.formatDecimalToPercent(mintStore.inflation),
