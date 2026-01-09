@@ -2,7 +2,6 @@
 import { themeChange } from 'theme-change';
 import { onMounted } from 'vue';
 import TxDialog from './components/TxDialog.vue';
-import CosmosWarningNotification from './components/CosmosWarningNotification.vue';
 
 onMounted(() => {
   themeChange(false);
@@ -13,6 +12,5 @@ onMounted(() => {
   <div>
     <RouterView />
     <TxDialog />
-    <CosmosWarningNotification />
   </div>
 </template>
