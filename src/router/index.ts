@@ -1,13 +1,18 @@
 import { useBlockchain } from '@/stores';
 import { createRouter, createWebHistory } from 'vue-router';
 // @ts-ignore
-import { setupLayouts } from 'virtual:generated-layouts';
-// @ts-ignore
 import routes from '~pages';
+import LayoutWrapper from '@/layouts/LayoutWrapper.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [...setupLayouts(routes)],
+  routes: [
+    {
+      path: '/',
+      component: LayoutWrapper,
+      children: routes
+    }
+  ],
 });
 
 //update current blockchain

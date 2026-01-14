@@ -1,4 +1,4 @@
-import { createI18n } from 'vue-i18n';
+import { createI18n, type I18n } from 'vue-i18n';
 
 const messages = Object.fromEntries(
   Object.entries(
@@ -7,9 +7,11 @@ const messages = Object.fromEntries(
   ).map(([key, value]) => [key.slice(10, -5), value.default])
 );
 
-export default createI18n({
+const i18n = createI18n({
   legacy: false,
   locale: localStorage.getItem('lang') || 'en',
   fallbackLocale: 'en',
   messages,
-});
+}) as I18n;
+
+export default i18n;

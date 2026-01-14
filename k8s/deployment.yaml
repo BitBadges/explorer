@@ -18,7 +18,7 @@ spec:
         - name: bitbadges-explorer
           image: trevormil23/bitbadges-explorer:latest
           ports:
-            - containerPort: 5173
+            - containerPort: 80
           envFrom:
             - configMapRef:
                 name: bitbadges-explorer-config
@@ -31,13 +31,13 @@ spec:
               memory: 2000Mi
           livenessProbe:
             httpGet:
-              path: /
-              port: 5173
+              path: /health
+              port: 80
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /
-              port: 5173
+              path: /health
+              port: 80
             initialDelaySeconds: 5
             periodSeconds: 5

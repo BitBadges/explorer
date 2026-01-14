@@ -1,14 +1,10 @@
-<script lang="ts">
-import { defineComponent, resolveComponent, h } from 'vue';
+<script lang="ts" setup></script>
 
-export default defineComponent({
-  setup() {
-    const routerView = resolveComponent('router-view');
-
-    return () => h('div', { class: 'layout-wrapper layout-blank' }, h(routerView));
-  },
-});
-</script>
+<template>
+  <div class="layout-wrapper layout-blank">
+    <slot />
+  </div>
+</template>
 
 <style>
 .layout-wrapper.layout-blank {

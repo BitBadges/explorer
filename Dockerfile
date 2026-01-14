@@ -1,5 +1,5 @@
-# Simple Dockerfile for Vue.js development
-FROM node:18-alpine
+# Build stage
+FROM node:22-alpine AS builder
 
 # Install dependencies
 RUN apk add --no-cache libc6-compat
@@ -10,13 +10,25 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 
 # Install dependencies
-RUN npm install --legacy-peer-deps
+RUN npm install
 
 # Copy source code
 COPY . .
 
-# Expose the default Vite dev server port
-EXPOSE 5173
+# Build the application
+RUN npm run build-only
 
-# Start the development server
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"] 
+# Production stage
+FROM nginx:alpine
+
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy built files from builder stage
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"] 

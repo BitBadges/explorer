@@ -34,12 +34,12 @@ const i18nLangs: Array<{ label: string; i18nLang: string }> = [
   },
 ];
 
-let locale = ref(useI18n({ useScope: 'global' }).locale);
+const { locale } = useI18n();
+let currentLang = ref(localStorage.getItem('lang') || 'en');
+
 watch(locale, (val) => {
   document.documentElement.setAttribute('lang', val as string);
 });
-
-let currentLang = ref(localStorage.getItem('lang') || 'en');
 
 watch(currentLang, (val: string) => {
   document.documentElement.setAttribute('lang', val as string);
