@@ -1,4 +1,5 @@
-FROM node:22-slim
+# Build stage
+FROM node:22-slim AS builder
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -25,8 +26,19 @@ COPY . .
 # Build the application
 RUN npm run build-only
 
-# Expose Vite preview port
-EXPOSE 4173
+# Production stage
+FROM node:22-slim
 
-# Start Vite preview server
-CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0", "--port", "4173"] 
+WORKDIR /app
+
+# Install serve globally (lightweight static file server for production)
+RUN npm install -g serve
+
+# Copy built files from builder stage
+COPY --from=builder /app/dist ./dist
+
+# Expose port
+EXPOSE 3000
+
+# Start serve (production static file server)
+CMD ["serve", "-s", "dist", "-l", "3000"] 
