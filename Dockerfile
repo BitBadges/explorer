@@ -1,17 +1,24 @@
 # Build stage
-FROM node:22-alpine AS builder
+FROM node:22-slim AS builder
 
-# Install dependencies
-RUN apk add --no-cache libc6-compat python3 make g++
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json* ./
+COPY package.json ./
 
-# Install dependencies with optional dependencies
-# The --include=optional flag ensures rollup native binaries are installed
-RUN npm install --include=optional || (rm -f package-lock.json && npm install --include=optional)
+# Remove package-lock.json and node_modules as suggested by the error message
+# This fixes npm's bug with optional dependencies
+RUN rm -rf package-lock.json node_modules 2>/dev/null || true
+
+# Install dependencies fresh (this ensures rollup native binaries are properly installed)
+RUN npm install --include=optional
 
 # Copy source code
 COPY . .
