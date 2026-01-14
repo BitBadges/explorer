@@ -2,15 +2,16 @@
 FROM node:22-alpine AS builder
 
 # Install dependencies
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat python3 make g++
 
 WORKDIR /app
 
 # Copy package files
 COPY package.json package-lock.json* ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies with optional dependencies
+# The --include=optional flag ensures rollup native binaries are installed
+RUN npm install --include=optional || (rm -f package-lock.json && npm install --include=optional)
 
 # Copy source code
 COPY . .
