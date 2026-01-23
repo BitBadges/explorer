@@ -63,8 +63,22 @@ export const useBlockchain = defineStore('blockchain', {
     computedChainMenu() {
       let currNavItem: VerticalNavItems = [];
       const router = useRouter();
-      const routes = router?.getRoutes() || [];
-      if (this.current && routes) {
+      // Get all routes, including nested child routes from LayoutWrapper
+      const allRoutes = router?.getRoutes() || [];
+      // Flatten routes to get child routes (from LayoutWrapper structure)
+      // The LayoutWrapper has children routes, so we need to extract them
+      const routes = allRoutes.flatMap(route => {
+        // If route has children (like LayoutWrapper), use children
+        if (route.children && route.children.length > 0) {
+          return route.children;
+        }
+        // Otherwise use the route itself (but skip LayoutWrapper parent route)
+        if (route.path === '/' && route.name === undefined) {
+          return [];
+        }
+        return [route];
+      });
+      if (this.current && routes.length > 0) {
         if (this.current?.themeColor) {
           const { color } = hexToRgb(this.current?.themeColor);
           const { h, s, l } = rgbToHsl(color);
