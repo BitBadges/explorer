@@ -33,6 +33,44 @@ const messages = computed(() => {
     }) || []
   );
 });
+
+// Detect if this transaction contains a MsgEthereumTx
+const hasEthereumTx = computed(() => {
+  return messages.value.some((msg) => {
+    const type = msg['@type'] || '';
+    return type.includes('MsgEthereumTx');
+  });
+});
+
+// Try to extract the EVM tx hash from events
+const evmTxHash = computed(() => {
+  const events = tx.value.tx_response?.events || [];
+  for (const event of events) {
+    if (event.type === 'ethereum_tx') {
+      const hashAttr = event.attributes?.find(
+        (attr: { key: string; value: string }) =>
+          attr.key === 'ethereumTxHash' || attr.key === 'ethereum_tx_hash'
+      );
+      if (hashAttr?.value) {
+        return hashAttr.value;
+      }
+    }
+  }
+  return null;
+});
+
+// Construct the EVM explorer URL
+const evmExplorerUrl = computed(() => {
+  if (evmTxHash.value) {
+    return `https://evm-testnet.explorer.bitbadges.io/tx/${evmTxHash.value}`;
+  }
+  // Fall back to block page if we can't get the EVM tx hash
+  const blockHeight = tx.value.tx_response?.height;
+  if (blockHeight) {
+    return `https://evm-testnet.explorer.bitbadges.io/block/${blockHeight}`;
+  }
+  return null;
+});
 </script>
 <template>
   <div>
@@ -124,6 +162,33 @@ const messages = computed(() => {
             </tr>
           </tbody>
         </table>
+      </div>
+      <div v-if="hasEthereumTx && evmExplorerUrl" class="mt-4">
+        <a
+          :href="evmExplorerUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary btn-sm"
+        >
+          View on EVM Explorer
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 ml-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            />
+          </svg>
+        </a>
+        <span v-if="!evmTxHash" class="text-xs text-gray-500 ml-2">
+          (viewing block {{ tx.tx_response.height }})
+        </span>
       </div>
     </div>
 
