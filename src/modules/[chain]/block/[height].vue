@@ -117,10 +117,32 @@ onBeforeRouteUpdate(async (to, from, next) => {
       <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
         <h2 class="card-title flex flex-row justify-between">
           <p class="">#{{ current.block?.header?.height }}</p>
-          <div class="flex" v-if="props.height">
+          <div class="flex items-center gap-2" v-if="props.height">
+            <a
+              :href="`https://evm-testnet.explorer.bitbadges.io/block/${height}`"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary btn-sm"
+            >
+              View on EVM Explorer
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 ml-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </a>
             <RouterLink
               :to="`/${store.blockchain.chainName}/block/${height - 1}`"
-              class="btn btn-primary btn-sm p-1 text-2xl mr-2"
+              class="btn btn-primary btn-sm p-1 text-2xl"
             >
               <Icon icon="mdi-arrow-left" class="w-full h-full" />
             </RouterLink>
