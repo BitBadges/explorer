@@ -103,7 +103,7 @@ function gotoHistory() {
 <route>
     {
       meta: {
-        i18n: 'cosmwasm'
+        // i18n: 'cosmwasm' - disabled: cosmwasm module deprecated
       }
     }
 </route>
