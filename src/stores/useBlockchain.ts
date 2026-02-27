@@ -52,7 +52,7 @@ export const useBlockchain = defineStore('blockchain', {
       return this.current?.logo || '';
     },
     defaultHDPath(): string {
-      const cointype = this.current?.coinType || '118';
+      const cointype = this.current?.coinType || '60';
       return `m/44'/${cointype}/0'/0/0`;
     },
     dashboard() {

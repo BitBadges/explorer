@@ -13,7 +13,7 @@ const dashboard = useDashboard();
 const chainStore = useBlockchain();
 const format = useFormatter();
 const sourceAddress = ref(''); //
-const sourceHdPath = ref("m/44/118/0'/0/0"); //
+const sourceHdPath = ref("m/44/60/0'/0/0"); //
 const selectedSource = ref({} as LocalKey); //
 const importStep = ref('step1');
 
@@ -382,7 +382,7 @@ async function loadBalances(chainName: string, endpoint: string, address: string
               placeholder="Input an address"
               @change="importStep = 'step2'"
             />
-            <input v-model="sourceHdPath" class="input input-bordered w-full input-sm" placeholder="m/44/118/0'/0/0" />
+            <input v-model="sourceHdPath" class="input input-bordered w-full input-sm" placeholder="m/44/60/0'/0/0" />
           </label>
         </div>
         <div
