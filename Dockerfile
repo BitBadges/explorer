@@ -37,7 +37,4 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 3000
 
-# Override default nginx port to 3000
-RUN sed -i 's/listen       80;/listen       3000;/' /etc/nginx/conf.d/default.conf
-
 CMD ["nginx", "-g", "daemon off;"]
