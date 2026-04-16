@@ -26,19 +26,18 @@ COPY . .
 # Build the application
 RUN npm run build-only
 
-# Production stage
-FROM node:22-slim
+# Production stage - lightweight nginx
+FROM nginx:alpine
 
-WORKDIR /app
+# Copy built static files
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Install serve globally (lightweight static file server for production)
-RUN npm install -g serve
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy built files from builder stage
-COPY --from=builder /app/dist ./dist
-
-# Expose port
 EXPOSE 3000
 
-# Start serve (production static file server)
-CMD ["serve", "-s", "dist", "-l", "3000"] 
+# Override default nginx port to 3000
+RUN sed -i 's/listen       80;/listen       3000;/' /etc/nginx/conf.d/default.conf
+
+CMD ["nginx", "-g", "daemon off;"]
