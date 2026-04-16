@@ -18,7 +18,7 @@ COPY package.json ./
 RUN rm -rf package-lock.json node_modules 2>/dev/null || true
 
 # Install dependencies fresh (this ensures rollup native binaries are properly installed)
-RUN npm install --include=optional
+RUN npm install --include=optional --legacy-peer-deps
 
 # Copy source code
 COPY . .
