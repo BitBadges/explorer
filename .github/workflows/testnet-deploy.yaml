@@ -4,8 +4,6 @@ name: Testnet Deploy
 on:
   push:
     branches: [ testnet ]
-  pull_request:
-    branches: [ testnet ]
 
 jobs:
   deploy:
