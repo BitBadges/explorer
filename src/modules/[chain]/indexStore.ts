@@ -244,7 +244,7 @@ export const useIndexModule = defineStore('module-index', {
           this.communityPool = x?.pool
             ?.filter((t) => t.denom.length < 10)
             ?.map((t) => ({
-              amount: String(parseInt(t.amount)),
+              amount: t.amount.split('.')[0] || '0',
               denom: t.denom,
             }));
         });
