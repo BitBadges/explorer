@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import MdEditor from 'md-editor-v3';
+import { MdPreview } from 'md-editor-v3';
 import PriceMarketChart from '@/components/charts/PriceMarketChart.vue';
 
 import { Icon } from '@iconify/vue';
@@ -279,7 +279,7 @@ const amount = computed({
       </div>
       <div class="h-[1px] w-full bg-gray-100 dark:bg-[#384059]"></div>
       <div class="max-h-[250px] overflow-auto p-4 text-sm">
-        <MdEditor :model-value="coinInfo.description?.en" previewOnly></MdEditor>
+        <MdPreview :model-value="coinInfo.description?.en || ''"></MdPreview>
       </div>
       <div class="mx-4 flex flex-wrap items-center">
         <div

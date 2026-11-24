@@ -1,5 +1,5 @@
 # Build stage
-FROM node:22-slim AS builder
+FROM node:22.14.0-slim AS builder
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -10,15 +10,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Copy package files
-COPY package.json ./
+# Copy package manifests and lockfile
+COPY package.json package-lock.json ./
 
-# Remove package-lock.json and node_modules as suggested by the error message
-# This fixes npm's bug with optional dependencies
-RUN rm -rf package-lock.json node_modules 2>/dev/null || true
-
-# Install dependencies fresh (this ensures rollup native binaries are properly installed)
-RUN npm install --include=optional --legacy-peer-deps
+# Install dependencies deterministically from lockfile
+RUN npm ci --include=optional --legacy-peer-deps
 
 # Copy source code
 COPY . .
@@ -26,8 +22,8 @@ COPY . .
 # Build the application
 RUN npm run build-only
 
-# Production stage - lightweight nginx
-FROM nginx:alpine
+# Production stage - unprivileged lightweight nginx
+FROM nginxinc/nginx-unprivileged:1.27.4-alpine
 
 # Copy built static files
 COPY --from=builder /app/dist /usr/share/nginx/html
@@ -36,5 +32,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 3000
+
+USER 101
 
 CMD ["nginx", "-g", "daemon off;"]

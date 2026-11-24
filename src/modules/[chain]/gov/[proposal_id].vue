@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from '@vue/reactivity';
-import MdEditor from 'md-editor-v3';
+import { MdPreview } from 'md-editor-v3';
 import ObjectElement from '@/components/dynamic/ObjectElement.vue';
 import { useBaseStore, useBlockchain, useFormatter, useGovStore, useStakingStore, useTxDialog } from '@/stores';
 import { PageRequest, type GovProposal, type GovVote, type PaginatedProposalDeposit, type Pagination } from '@/types';
@@ -233,15 +233,14 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
         <ObjectElement :value="proposal.content" />
       </div>
       <div v-if="(proposal.summary && !proposal.content?.description) || metaItem(proposal?.metadata)?.summary">
-        <MdEditor
+        <MdPreview
           :model-value="
             format.multiLine(
               proposal.summary || metaItem(proposal?.metadata)?.summary
             )
           "
-          previewOnly
           class="md-editor-recover"
-        ></MdEditor>
+        ></MdPreview>
       </div>
     </div>
     <!-- grid lg:!!grid-cols-3 auto-rows-max-->
