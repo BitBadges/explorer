@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: bitbadges-explorer-config
 data:
-  NODE_ENV: 'development'
+  NODE_ENV: 'production'
   HOST: '0.0.0.0'
-  PORT: '5173'
+  PORT: '3000'

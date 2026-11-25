@@ -27,19 +27,15 @@
     "@intlify/unplugin-vue-i18n": "^11.0.3",
     "@leapwallet/cosmos-snap-provider": "^0.1.20",
     "@leapwallet/name-matcha": "^2.0.0",
-    "@osmonauts/lcd": "^0.8.0",
-    "@personaxyz/ad-sdk": "0.0.25",
     "@vitejs/plugin-vue-jsx": "^5.1.3",
     "@vueuse/core": "^9.12.0",
     "@vueuse/integrations": "^10.1.2",
     "@vueuse/math": "^9.12.0",
     "apexcharts": "^4.7.0",
     "autoprefixer": "^10.4.14",
-    "axios": "^1.3.2",
-    "bitbadgesjs-sdk": "^0.17.0",
+    "bitbadgesjs-sdk": "^0.34.0",
     "bech32": "^1.1.4",
     "buffer": "^6.0.3",
-    "build": "^0.1.4",
     "cross-fetch": "^3.1.5",
     "daisyui": "^3.1.0",
     "dayjs": "^1.11.7",
@@ -47,9 +43,8 @@
     "js-sha3": "^0.8.0",
     "lazy-load-vue3": "^1.3.0",
     "long": "^5.2.1",
-    "md-editor-v3": "^2.8.1",
+    "md-editor-v3": "^7.1.1",
     "numeral": "^2.0.6",
-    "osmojs": "^14.0.0-rc.0",
     "pinia": "^2.0.28",
     "postcss": "^8.5.6",
     "qrcode": "^1.5.3",
@@ -64,7 +59,6 @@
     "vue3-perfect-scrollbar": "^2.0.0"
   },
   "devDependencies": {
-    "@osmonauts/telescope": "^0.88.2",
     "@types/marked": "^4.0.8",
     "@types/node": "^22.19.6",
     "@types/numeral": "^2.0.2",
@@ -87,10 +81,23 @@
     "vue-json-viewer": "3",
     "vue-tsc": "^3.2.2"
   },
+  "overrides": {
+    "axios": "^1.21.1",
+    "glob": "^14.0.6",
+    "minimatch": "^11.0.9",
+    "protobufjs": "^7.5.4",
+    "zod": "^4.6.7",
+    "@cosmjs/amino": "^0.38.1",
+    "@cosmjs/cosmwasm-stargate": "^0.38.1",
+    "@cosmjs/crypto": "^0.38.1",
+    "@cosmjs/encoding": "^0.38.1",
+    "@cosmjs/proto-signing": "^0.38.1",
+    "@cosmjs/stargate": "^0.38.1",
+    "@cosmjs/tendermint-rpc": "^0.38.1"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  },
-  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+  }
 }

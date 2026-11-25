@@ -1,25 +1,28 @@
-
 name: Testnet Deploy
 
 on:
   push:
     branches: [ testnet ]
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     name: Ping deploy
-    runs-on: testnet 
+    runs-on: testnet
     steps:
-    - name: print
-      run: echo ${GITHUB_REF#refs/heads/}
-    - name: Git Checkout Latest
-      uses: actions/checkout@v2
-      
-    - name: Install
-      run: yarn install
+      - name: print
+        run: echo "${GITHUB_REF#refs/heads/}"
 
-    - name: Build
-      run: yarn run vue-cli-service build
+      - name: Git Checkout Latest
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
-    - name: Deploy
-      run: cp -rf ./dist/* /var/www/html/
+      - name: Install
+        run: npm ci --include=optional --legacy-peer-deps
+
+      - name: Build
+        run: npm run build-only
+
+      - name: Deploy
+        run: cp -rf ./dist/* /var/www/html/
