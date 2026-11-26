@@ -72,7 +72,7 @@ export const useBadgeBankStore = defineStore('badgebankstore', {
     initial() {
       this.$reset();
       this.supply = {} as Coin;
-      const denom = 'ubadge';
+      const denom = 'abadge';
       if (denom) {
         this.blockchain.rpc.getBankSupplyByDenom(denom).then((res) => {
           if (res.amount) this.supply = res.amount;

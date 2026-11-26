@@ -20,9 +20,9 @@
   "logo": "https://github.com/cosmos/chain-registry/blob/master/bitbadges/images/badge_logo.png?raw=true",
   "assets": [
     {
-      "base": "ubadge",
+      "base": "abadge",
       "symbol": "BADGE",
-      "exponent": "9",
+      "exponent": "18",
       "logo": "https://github.com/cosmos/chain-registry/blob/master/bitbadges/images/badge_logo.png?raw=true"
     },
     {
