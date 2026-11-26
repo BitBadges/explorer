@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { isBech32Address } from '@/libs/utils';
-import { useBlockchain, useFormatter } from '@/stores';
+import { useBaseStore, useBlockchain, useFormatter } from '@/stores';
 import { MdPreview } from 'md-editor-v3';
 import { computed, onMounted, ref } from 'vue';
 
@@ -8,6 +8,7 @@ import { fromBase64, toHex } from '@cosmjs/encoding';
 
 import { registry as nameMatcha } from '@leapwallet/name-matcha';
 
+const baseStore = useBaseStore();
 const chainStore = useBlockchain();
 const props = defineProps(['value']);
 const format = useFormatter();
@@ -55,7 +56,12 @@ const isConvertable = computed(() => {
 });
 </script>
 <template>
-  <MdPreview v-if="isMD()" :model-value="format.multiLine(value)" class="md-editor-recover"></MdPreview>
+  <MdPreview
+    v-if="isMD()"
+    :model-value="format.multiLine(value)"
+    :theme="baseStore.theme"
+    class="md-editor-recover"
+  ></MdPreview>
   <span v-else-if="isAddress()" class="flex">
     <RouterLink :to="`/${chainStore.chainName}/account/${text}`">{{ text }}</RouterLink>
     <div v-for="{ name, provider } in names">

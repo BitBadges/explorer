@@ -24,6 +24,7 @@ spec:
       containers:
         - name: bitbadges-explorer
           image: trevormil23/bitbadges-explorer:3.0.0
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           envFrom:
