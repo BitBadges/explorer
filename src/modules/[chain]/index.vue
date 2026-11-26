@@ -3,7 +3,15 @@ import { MdPreview } from 'md-editor-v3';
 import PriceMarketChart from '@/components/charts/PriceMarketChart.vue';
 
 import { Icon } from '@iconify/vue';
-import { useBlockchain, useFormatter, useTxDialog, useWalletStore, useStakingStore, useParamStore } from '@/stores';
+import {
+  useBaseStore,
+  useBlockchain,
+  useFormatter,
+  useTxDialog,
+  useWalletStore,
+  useStakingStore,
+  useParamStore,
+} from '@/stores';
 import { onMounted, ref } from 'vue';
 import { useIndexModule, colorMap, tickerUrl } from './indexStore';
 import { computed } from '@vue/reactivity';
@@ -14,6 +22,7 @@ import ArrayObjectElement from '@/components/dynamic/ArrayObjectElement.vue';
 
 const props = defineProps(['chain']);
 
+const baseStore = useBaseStore();
 const blockchain = useBlockchain();
 const store = useIndexModule();
 const walletStore = useWalletStore();
@@ -279,7 +288,11 @@ const amount = computed({
       </div>
       <div class="h-[1px] w-full bg-gray-100 dark:bg-[#384059]"></div>
       <div class="max-h-[250px] overflow-auto p-4 text-sm">
-        <MdPreview :model-value="coinInfo.description?.en || ''"></MdPreview>
+        <MdPreview
+          :model-value="coinInfo.description?.en || ''"
+          :theme="baseStore.theme"
+          class="md-editor-recover"
+        ></MdPreview>
       </div>
       <div class="mx-4 flex flex-wrap items-center">
         <div

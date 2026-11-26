@@ -11,6 +11,7 @@ import { fromBech32, toHex } from '@cosmjs/encoding';
 
 const props = defineProps(['proposal_id', 'chain']);
 const proposal = ref({} as GovProposal);
+const baseStore = useBaseStore();
 const format = useFormatter();
 const store = useGovStore();
 const dialog = useTxDialog();
@@ -232,13 +233,17 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
       <div class="">
         <ObjectElement :value="proposal.content" />
       </div>
-      <div v-if="(proposal.summary && !proposal.content?.description) || metaItem(proposal?.metadata)?.summary">
+      <div
+        v-if="(proposal.summary && !proposal.content?.description) || metaItem(proposal?.metadata)?.summary"
+        class="mt-3"
+      >
         <MdPreview
           :model-value="
             format.multiLine(
               proposal.summary || metaItem(proposal?.metadata)?.summary
             )
           "
+          :theme="baseStore.theme"
           class="md-editor-recover"
         ></MdPreview>
       </div>

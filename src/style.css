@@ -52,3 +52,48 @@ html[data-theme='dark'] {
   opacity: 0;
   transform: translateY(-calc(15%));
 }
+
+.md-editor.md-editor-previewOnly {
+  background-color: transparent;
+  color: inherit;
+}
+
+.md-editor.md-editor-previewOnly pre {
+  overflow-x: auto;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+html.dark .md-editor.md-editor-previewOnly pre,
+html[data-theme='dark'] .md-editor.md-editor-previewOnly pre {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.md-editor.md-editor-previewOnly code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+html.dark .md-editor.md-editor-previewOnly code,
+html[data-theme='dark'] .md-editor.md-editor-previewOnly code {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.md-editor.md-editor-previewOnly pre code {
+  padding: 0;
+  background-color: transparent;
+}
+
+.md-editor.md-editor-previewOnly blockquote {
+  border-left: 3px solid #666cff;
+  padding-left: 0.75rem;
+  opacity: 0.85;
+}
+
+.md-editor.md-editor-previewOnly p:last-child {
+  margin-bottom: 0;
+}
